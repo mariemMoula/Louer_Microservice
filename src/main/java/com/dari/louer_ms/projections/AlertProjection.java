@@ -18,7 +18,7 @@ public class AlertProjection {
     @EventHandler
     public void on(AlertCreatedEvent event) {
         Alert alert = new Alert();
-        alert.setId(event.getAlertId());
+        alert.setAlertId(event.getAlertId());
         alert.setUserId(event.getUserId());
         alert.setCriteria(event.getCriteria());
         alertRepository.save(alert);

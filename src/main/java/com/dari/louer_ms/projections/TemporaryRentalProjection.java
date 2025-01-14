@@ -30,7 +30,7 @@ public class TemporaryRentalProjection {
 
     @EventHandler
     public void on(TemporaryRentalUpdatedEvent event) {
-        TemporaryRental rental = repository.findById(event.getRentalId()).orElseThrow();
+        TemporaryRental rental = repository.findById(Long.valueOf(event.getRentalId())).orElseThrow();
         rental.setStartDate(event.getStartDate());
         rental.setEndDate(event.getEndDate());
         rental.setPrice(event.getPrice());

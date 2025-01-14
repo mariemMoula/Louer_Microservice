@@ -3,6 +3,7 @@ package com.dari.louer_ms.controllers;
 import com.dari.louer_ms.commands.CreateTemporaryRentalCommand;
 import com.dari.louer_ms.commands.UpdateTemporaryRentalCommand;
 import com.dari.louer_ms.entities.TemporaryRental;
+import com.dari.louer_ms.repositories.TemporaryRentalRepository;
 import com.dari.louer_ms.services.RentalService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class TemporaryRentalController {
 
     // Nom du circuit breaker défini dans la configuration Resilience4j
     private static final String TEMPORARY_RENTAL_SERVICE = "temporaryRentalService";
+    private final TemporaryRentalRepository temporaryRentalRepository;
 
     @PostMapping
     @CircuitBreaker(name = TEMPORARY_RENTAL_SERVICE, fallbackMethod = "createRentalFallback")
@@ -63,13 +65,13 @@ public class TemporaryRentalController {
     @GetMapping("/{rentalId}")
     @CircuitBreaker(name = TEMPORARY_RENTAL_SERVICE, fallbackMethod = "getRentalFallback")
     public ResponseEntity<TemporaryRental> getTemporaryRentalById(@PathVariable String rentalId) {
-        return ResponseEntity.ok(temporaryRentalService.getRentalById(rentalId));
+        return ResponseEntity.ok(temporaryRentalRepository.getRentalByRentalId(rentalId));
     }
 
     @GetMapping
     @CircuitBreaker(name = TEMPORARY_RENTAL_SERVICE, fallbackMethod = "getAllRentalsFallback")
     public ResponseEntity<List<TemporaryRental>> getAllTemporaryRentals() {
-        return ResponseEntity.ok(temporaryRentalService.getAllRentals());
+        return ResponseEntity.ok(temporaryRentalRepository.findAll());
     }
 
     // Méthodes de fallback pour le circuit breaker

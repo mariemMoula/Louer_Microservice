@@ -1,5 +1,9 @@
 package com.dari.louer_ms.aggregates;
 
+import com.dari.louer_ms.commands.CreateTemporaryRentalCommand;
+import com.dari.louer_ms.commands.UpdateTemporaryRentalCommand;
+import com.dari.louer_ms.events.TemporaryRentalCreatedEvent;
+import com.dari.louer_ms.events.TemporaryRentalUpdatedEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;

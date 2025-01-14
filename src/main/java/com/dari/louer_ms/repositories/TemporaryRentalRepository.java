@@ -10,4 +10,6 @@ public interface TemporaryRentalRepository extends JpaRepository<TemporaryRental
     // Trouver les locations temporaires par propertyId et date
     List<TemporaryRental> findByPropertyIdAndStartDateBeforeAndEndDateAfter(
             String propertyId, String startDate, String endDate);
+
+    TemporaryRental getRentalByRentalId(String rentalId);
 }
