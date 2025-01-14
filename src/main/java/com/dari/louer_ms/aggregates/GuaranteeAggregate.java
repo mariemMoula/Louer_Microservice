@@ -1,7 +1,5 @@
 package com.dari.louer_ms.aggregates;
 
-import com.dari.louer_ms.commands.CreateGuaranteeCommand;
-import com.dari.louer_ms.commands.UpdateGuaranteeStatusCommand;
 import com.dari.louer_ms.events.GuaranteeCreatedEvent;
 import com.dari.louer_ms.events.GuaranteeStatusUpdatedEvent;
 import org.axonframework.commandhandling.CommandHandler;
@@ -17,8 +15,9 @@ public class GuaranteeAggregate {
     @AggregateIdentifier
     private String guaranteeId;
     private String tenantId;
-    private String document;
-    private String status;
+    private String propertyId;
+    private GuaranteeStatus status;
+    private List<String> documents; // Paths to scanned documents
 
     public GuaranteeAggregate() {
         // Required by Axon
@@ -26,23 +25,26 @@ public class GuaranteeAggregate {
 
     @CommandHandler
     public GuaranteeAggregate(CreateGuaranteeCommand command) {
-        if (command.getDocumentUrl() == null || command.getDocumentUrl().isEmpty()) {
+        if (command.getDocuments() == null || command.getDocuments().isEmpty()) {
             throw new IllegalArgumentException("Documents must be provided");
         }
 
         // Emit event
         apply(new GuaranteeCreatedEvent(
                 command.getGuaranteeId(),
-                command.getUserId(),
-                command.getDocumentUrl()
+                command.getTenantId(),
+                command.getPropertyId(),
+                command.getDocuments()
         ));
     }
 
     @EventSourcingHandler
     public void on(GuaranteeCreatedEvent event) {
         this.guaranteeId = event.getGuaranteeId();
-        this.tenantId = event.getUserId();
-        this.document = event.getDocumentUrl();
+        this.tenantId = event.getTenantId();
+        this.propertyId = event.getPropertyId();
+        this.documents = event.getDocuments();
+        this.status = GuaranteeStatus.PENDING;
     }
 
     @CommandHandler

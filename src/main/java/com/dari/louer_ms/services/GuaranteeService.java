@@ -22,4 +22,22 @@ public class GuaranteeService {
     public List<Guarantee> findGuaranteesByPropertyId(String propertyId) {
         return guaranteeRepository.findByPropertyId(propertyId);
     }
+
+    // Mettre à jour une garantie
+    public Guarantee updateGuarantee(String guaranteeId, Guarantee updatedGuarantee) {
+        return guaranteeRepository.findById(guaranteeId).map(existingGuarantee -> {
+            existingGuarantee.setUserId(updatedGuarantee.getUserId());
+            existingGuarantee.setDocumentUrl(updatedGuarantee.getDocumentUrl());
+            return guaranteeRepository.save(existingGuarantee);
+        }).orElse(null);
+    }
+
+    // Supprimer une garantie
+    public boolean deleteGuarantee(String guaranteeId) {
+        if (guaranteeRepository.existsById(guaranteeId)) {
+            guaranteeRepository.deleteById(guaranteeId);
+            return true;
+        }
+        return false;
+    }
 }
