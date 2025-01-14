@@ -6,18 +6,25 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class TemporaryRental {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private String rentalId;
     private String propertyId;
     private String startDate;
     private String endDate;
     private double price;
+
+    public TemporaryRental(String rentalId, String propertyId, String startDate, String endDate, double price) {
+        this.rentalId = rentalId;
+        this.propertyId = propertyId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.price = price;
+    }
+
+    public TemporaryRental() {
+    }
 }
