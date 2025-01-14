@@ -10,4 +10,5 @@ public class GuaranteeCreatedEvent {
     private String guaranteeId;
     private String userId;
     private String documentUrl;
+    private String propertyId;
 }

@@ -20,6 +20,6 @@ public class Property {
     private Double price;
     private String propertyType;
     private String ownerId;
-    private Integer Size;
+    private Integer size;
     private Boolean available;
 }

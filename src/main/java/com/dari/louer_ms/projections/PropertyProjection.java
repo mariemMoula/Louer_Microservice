@@ -31,7 +31,7 @@ public class PropertyProjection {
 
     @EventHandler
     public void on(PropertyUpdatedEvent event) {
-        Property property = propertyRepository.findById(Long.valueOf(event.getPropertyId())).orElse(null);
+        Property property = propertyRepository.findById(event.getPropertyId()).orElse(null);
         if (property != null) {
             property.setLocation(event.getLocation());
             property.setSize(event.getSize());

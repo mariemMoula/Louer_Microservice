@@ -21,6 +21,6 @@ public class PropertySaga {
         // Notify users with pre-saved criteria
         notificationService.createAlert(new Alert(null, event.getPropertyId(), "A new property matching your criteria is" +
                 " " +
-                "available!"));
+                "available!", true));
     }
 }

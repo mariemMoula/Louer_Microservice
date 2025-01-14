@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/louerdb?createDatabaseIfNotExist=true
     username: root
-    password: mimi019mimi
+    password: toor
   jpa:
     hibernate:
       ddl-auto: update

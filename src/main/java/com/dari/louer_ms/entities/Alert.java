@@ -19,4 +19,5 @@ public class Alert {
     private String alertId;
     private String userId;
     private String criteria;
+    private Boolean isActive;
 }

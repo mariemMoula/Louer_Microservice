@@ -15,4 +15,5 @@ public class Guarantee {
     private String guaranteeId;
     private String userId;
     private String documentUrl;
+    private String propertyId;
 }

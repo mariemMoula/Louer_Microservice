@@ -9,4 +9,5 @@ public class CreateGuaranteeCommand {
     private String guaranteeId;
     private String userId;
     private String documentUrl;
+    private String propertyId;
 }

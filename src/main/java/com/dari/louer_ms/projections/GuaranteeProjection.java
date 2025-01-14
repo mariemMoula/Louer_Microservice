@@ -33,7 +33,6 @@ public class GuaranteeProjection {
     public void on(GuaranteeUpdatedEvent event) {
         Guarantee guarantee = guaranteeMap.get(event.getGuaranteeId());
         if (guarantee != null) {
-            guarantee.setUserId(event.getUserId());
             guarantee.setDocumentUrl(event.getDocumentUrl());
         }
     }
