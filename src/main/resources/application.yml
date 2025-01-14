@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: louer-ms
+  datasource:
+    url: jdbc:mysql://localhost:3306/louerdb?createDatabaseIfNotExist=true
+    username: root
+    password: mimi019mimi
+  jpa:
+    hibernate:
+      ddl-auto: update
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5000ms
+        slidingWindowSize: 10
+    instances:
+      propertyService:
+        baseConfig: default
+        failureRateThreshold: 50
